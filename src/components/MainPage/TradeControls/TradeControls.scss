@@ -1,0 +1,92 @@
+@import 'static/mixins/mixins.scss';
+
+.controls {
+  margin-top: 45px;
+  position: relative;
+
+  @include smallPhone {
+    text-align: center;
+  }
+}
+
+.controls_title {
+  margin-bottom: 45px;
+
+  @include smartphone {
+    text-align: center;
+  }
+}
+
+.controls__error {
+  position: absolute;
+  color: rgb(223, 4, 4);
+  top: 50px;
+}
+
+.controls__error_trade {
+  top: 30px;
+}
+
+.control__wrap {
+  margin-bottom: 20px;
+}
+
+.input {
+  position: relative;
+  display: inline-block;
+}
+
+.input__value {
+  width: 230px;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-right: 35px;
+  padding-bottom: 10px;
+  border-radius: 5px;
+  background-color: #e7e5e5;
+  color: #313030;
+  overflow: hidden;
+  border: none;
+}
+
+.input__value_btc {
+  padding-right: 55px;
+}
+
+.input__value_error {
+  background-color: #fdcbcb;
+}
+
+.input__type {
+  color: #adadad;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.control__button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  min-width: 110px;
+  margin-left: 20px;
+  color: #ffffff;
+  outline: none;
+
+  @include smartphone {
+    margin-top: 20px;
+  }
+}
+
+.control__button_sell {
+  background-color: #ca6483;
+}
+
+.control__button_buy {
+  background-color: #5fcfca;
+}
+
+.control__button:active {
+  opacity: 0.8;
+}

@@ -1,0 +1,7 @@
+.error__content {
+  color: rgb(179, 25, 25);
+}
+
+.error__content::first-letter {
+  text-transform: uppercase;
+}

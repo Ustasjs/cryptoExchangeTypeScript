@@ -1,0 +1,31 @@
+.chart {
+  margin-bottom: 20px; }
+
+.title {
+  font-size: 24px;
+  font-weight: 700; }
+
+.chart_title {
+  margin-bottom: 45px; }
+
+.chart__buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  background-color: #edf0f1; }
+
+.chart__button {
+  color: #91a3ab;
+  padding: 5px 10px;
+  margin-right: 10px;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  cursor: pointer; }
+
+.chart__button_active {
+  background-color: #4db6e2;
+  color: #ffffff;
+  border-radius: 5px; }
+
+.rotate-icon {
+  width: 80%; }

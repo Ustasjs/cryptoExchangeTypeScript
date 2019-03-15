@@ -1,0 +1,132 @@
+@import 'static/mixins/mixins.scss';
+
+.header {
+  background-color: #2a2c2e;
+  color: #ffffff;
+}
+
+.container_header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  @include smartphone {
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}
+
+.header__item {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.header__item_left {
+  display: flex;
+  justify-content: flex-start;
+
+  @include smallTablet {
+    display: none;
+  }
+}
+
+.header__wrap {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.header__logo {
+  width: 170px;
+}
+
+.header__item_currency {
+  @include smartphone {
+    display: block;
+    order: 2;
+  }
+}
+
+.currency {
+  background-color: #555658;
+  font-size: 18px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  @include smartphone {
+    font-size: 16px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 20px;
+  }
+}
+
+.currency__type {
+  font-weight: 700;
+}
+
+.currency:first-child {
+  margin-right: 20px;
+  @include smartphone {
+    margin-right: 0;
+  }
+}
+
+.currency__link {
+  color: #a8a8a8;
+  padding-left: 45px;
+  padding-right: 45px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.currency__link_active {
+  color: #ffffff;
+}
+
+.header__item_right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  @include smartphone {
+    order: 1;
+    @include smartphone {
+      display: block;
+    }
+  }
+}
+
+.header__userInfo {
+  padding-left: 25px;
+  padding-top: 8px;
+  padding-right: 25px;
+  padding-bottom: 8px;
+  background-color: #555658;
+  border-radius: 20px;
+}
+
+.header__userInfo_email {
+  margin-right: 10px;
+  @include bigTablet {
+    display: none;
+  }
+}
+
+.header__userInfo_clickable {
+  cursor: pointer;
+}
+
+.header__userInfo_clickable:active {
+  background-color: #3f4041;
+  cursor: pointer;
+}
+
+.header__userInfo_logout {
+  @include smartphone {
+    border-radius: 0;
+  }
+}

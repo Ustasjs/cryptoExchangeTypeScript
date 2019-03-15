@@ -1,0 +1,27 @@
+@import 'static/mixins/mixins.scss';
+
+.chart__wrap {
+  position: relative;
+}
+
+.chart__title {
+  @include smartphone {
+    text-align: center;
+  }
+}
+
+.chartjs-render-monitor {
+  border: 1px solid #edf0f1;
+  padding-top: 10px;
+}
+
+.chart__spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.chart__content_hidden {
+  visibility: hidden;
+}

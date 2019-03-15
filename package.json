@@ -7,9 +7,22 @@
     "@types/node": "11.11.3",
     "@types/react": "16.8.8",
     "@types/react-dom": "16.8.2",
+    "axios": "^0.18.0",
+    "chart.js": "^2.8.0",
+    "chartkick": "^3.0.2",
+    "node-sass": "^4.11.0",
+    "normalize.css": "^8.0.1",
     "react": "^16.8.4",
+    "react-chartkick": "^0.3.0",
     "react-dom": "^16.8.4",
+    "react-particles-js": "^2.4.2",
+    "react-redux": "^6.0.1",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.8",
+    "react-svg-spinner": "^1.0.4",
+    "redux": "^4.0.1",
+    "redux-actions": "^2.6.5",
+    "redux-saga": "^1.0.2",
     "typescript": "3.3.3333"
   },
   "scripts": {
@@ -26,5 +39,10 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@redux-saga/testing-utils": "^1.0.2",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2"
+  }
 }

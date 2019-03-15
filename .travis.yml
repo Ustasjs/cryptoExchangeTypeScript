@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - 8
+
+cache: yarn
+script:
+  - yarn build
+  - yarn test
+
+scripts: true
+
+after_success:
+  - echo '/*  /index.html 200' > build/_redirects
+  - chmod +x ./deploy.sh
+  - ./deploy.sh

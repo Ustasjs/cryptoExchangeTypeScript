@@ -1,0 +1,70 @@
+@import 'static/mixins/mixins.scss';
+
+.auth__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 20px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(195, 195, 195);
+  border-radius: 7px;
+  box-shadow: 0px 0px 38px 20px rgba(42, 42, 42, 0.07);
+  background-color: #ffffff;
+}
+
+.auth__login-wrap {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.auth__input {
+  height: 50px;
+  width: 400px;
+  border-color: rgb(223, 223, 223);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 7px;
+  padding-left: 55px;
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  outline: none;
+  font-size: 18px;
+
+  @include smartphone {
+    width: 260px;
+  }
+}
+
+.auth__icon {
+  width: 20px;
+  color: #999999;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.auth__submit {
+  border-width: 1px;
+  border-color: rgb(223, 223, 223);
+  border-style: solid;
+  border-radius: 7px;
+  background-color: rgb(77, 182, 226);
+  font-size: 24px;
+  color: #ffffff;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  outline: none;
+
+  @include smartphone {
+    font-size: 18px;
+  }
+}
+
+.auth__submit:active {
+  background-color: #3883a2;
+}

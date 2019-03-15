@@ -1,0 +1,50 @@
+@import 'static/mixins/mixins.scss';
+
+.footer {
+  background-color: #2a2c2e;
+  color: #ffffff;
+}
+
+.container__footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  @include smartphone {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.footer__item_left {
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.footer__info {
+  text-align: start;
+  width: 250px;
+  margin-left: 10px;
+}
+
+.nav__item {
+  display: inline-block;
+  margin-right: 20px;
+  margin-left: 20px;
+  font-size: 18px;
+}
+
+.footer__wrap {
+  margin-right: 10px;
+}
+
+.footer__logo {
+  width: 170px;
+}
+
+.footer__par {
+  @include smartphone {
+    text-align: center;
+  }
+}
