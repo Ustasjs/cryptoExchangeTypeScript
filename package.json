@@ -3,10 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/jest": "24.0.11",
-    "@types/node": "11.11.3",
-    "@types/react": "16.8.8",
-    "@types/react-dom": "16.8.2",
     "axios": "^0.18.0",
     "chart.js": "^2.8.0",
     "chartkick": "^3.0.2",
@@ -29,7 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,7 +39,18 @@
   ],
   "devDependencies": {
     "@redux-saga/testing-utils": "^1.0.2",
+    "@types/chart.js": "^2.7.48",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/jest": "^24.0.11",
+    "@types/node": "^11.11.4",
+    "@types/react": "^16.8.8",
+    "@types/react-dom": "^16.8.2",
+    "@types/react-redux": "^7.0.3",
+    "@types/react-router-dom": "^4.3.1",
     "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.11.2"
+    "enzyme-adapter-react-16": "^1.11.2",
+    "redux-devtools-extension": "^2.13.8",
+    "tslint": "^5.14.0",
+    "tslint-react": "^3.6.0"
   }
 }

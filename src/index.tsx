@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import 'normalize.css';
 import './index.css';
 import './static/styles/font.css';
@@ -8,6 +8,12 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import createStore from './store';
 import AppRouter from './components/AppRouter';
+
+declare global {
+  interface Window {
+    Chart: Chart;
+  }
+}
 
 window.Chart = require('chart.js');
 
