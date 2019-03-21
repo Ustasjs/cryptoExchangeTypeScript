@@ -50,7 +50,12 @@ export default {
       distance: 192.28766234286476,
       color: '#4db6e2',
       opacity: 0.8011985930952699,
-      width: 1.2819177489524316
+      width: 1.2819177489524316,
+      shadow: {
+        enable: false,
+        blur: 1,
+        color: '#4db6e2'
+      }
     },
     move: {
       enable: true,
@@ -69,6 +74,17 @@ export default {
   },
   interactivity: {
     detect_on: 'canvas',
+    events: {
+      onhover: {
+        enable: false,
+        mode: 'grab'
+      },
+      onclick: {
+        enable: false,
+        mode: 'grab'
+      },
+      resize: false
+    },
     modes: {
       grab: {
         distance: 400,
@@ -95,5 +111,6 @@ export default {
       }
     }
   },
-  retina_detect: true
+  retina_detect: true,
+  fps_limit: 60
 };

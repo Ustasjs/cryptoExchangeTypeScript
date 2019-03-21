@@ -1,7 +1,14 @@
 import React from 'react';
 import './AuthError.css';
 
-export function AuthError(props) {
+interface IAuthErrorProps {
+  isLoginStage: boolean;
+  loginError?: string;
+  registrationError?: string;
+  inputError: string | null;
+}
+
+export function AuthError(props: IAuthErrorProps) {
   const { isLoginStage, loginError, registrationError, inputError } = props;
   return (
     <div className="AuthError">

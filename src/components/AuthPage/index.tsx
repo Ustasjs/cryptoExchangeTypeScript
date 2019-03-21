@@ -13,8 +13,23 @@ import {
   getLoginError,
   getRegistrationError
 } from '../../reducers/auth';
+import { ICredentials, IParaticlesParams } from '../../types';
 
-export class AuthPage extends Component {
+interface IAuthPageState {
+  isLoginStage: boolean;
+}
+
+interface IAuthPageProps {
+  loginError?: string;
+  registrationError?: string;
+  isAuthorized: boolean;
+  loginRequest: typeof loginRequest;
+  registrationRequest: typeof registrationRequest;
+}
+
+const particlesParams = params as IParaticlesParams;
+
+export class AuthPage extends Component<IAuthPageProps, IAuthPageState> {
   state = {
     isLoginStage: true
   };
@@ -50,30 +65,33 @@ export class AuthPage extends Component {
           </div>
         </div>
         <div className="animation">
-          <Particles params={params} />
+          <Particles params={particlesParams} />
         </div>
       </main>
     );
   }
 
-  handleClick = authData => {
+  handleClick = (authData: ICredentials): void => {
     const { loginRequest, registrationRequest } = this.props;
     const { isLoginStage } = this.state;
 
     isLoginStage ? loginRequest(authData) : registrationRequest(authData);
   };
 
-  handleStatusChangeClick = () => {
+  handleStatusChangeClick = (): void => {
     const { isLoginStage } = this.state;
     this.setState({ isLoginStage: !isLoginStage });
   };
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: IAuthPageState) => ({
   isAuthorized: getIsAuthorized(state),
   loginError: getLoginError(state),
   registrationError: getRegistrationError(state)
 });
 const mapDispatchToProps = { loginRequest, registrationRequest };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AuthPage);

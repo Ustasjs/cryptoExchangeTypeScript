@@ -1,5 +1,10 @@
 export interface IStore {}
 
+export interface ICredentials {
+  email: string;
+  password: string;
+}
+
 export interface IParaticlesParams {
   particles: {
     number: {
@@ -13,7 +18,7 @@ export interface IParaticlesParams {
       value: string;
     };
     shape: {
-      type: string;
+      type: 'polygon';
       stroke: {
         width: number;
         color: string;
@@ -53,14 +58,19 @@ export interface IParaticlesParams {
       color: string;
       opacity: number;
       width: number;
+      shadow: {
+        enable: boolean;
+        blur: number;
+        color: string;
+      };
     };
     move: {
       enable: boolean;
       speed: number;
-      direction: string;
+      direction: 'none';
       random: boolean;
       straight: boolean;
-      out_mode: string;
+      out_mode: 'out';
       bounce: boolean;
       attract: {
         enable: boolean;
@@ -71,6 +81,17 @@ export interface IParaticlesParams {
   };
   interactivity: {
     detect_on: string;
+    events: {
+      onhover: {
+        enable: boolean;
+        mode: 'grab';
+      };
+      onclick: {
+        enable: boolean;
+        mode: 'grab';
+      };
+      resize: boolean;
+    };
     modes: {
       grab: {
         distance: number;
@@ -98,4 +119,5 @@ export interface IParaticlesParams {
     };
   };
   retina_detect: boolean;
+  fps_limit: number;
 }

@@ -1,9 +1,5 @@
 import axios from 'axios';
-
-interface ICredentials {
-  email: string;
-  password: string;
-}
+import { ICredentials } from './types';
 
 const baseURL = 'https://crypto-exchange-backend.herokuapp.com/';
 

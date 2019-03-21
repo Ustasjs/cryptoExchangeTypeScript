@@ -4,11 +4,27 @@ import './AuthForm.css';
 import userShape from './images/user-shape.svg';
 import lockShape from './images/padlock-unlock.svg';
 
-export class AuthForm extends Component {
+interface IAuthErrorState {
+  [x: string]: string | null;
+}
+
+type inputType = {
+  id: string;
+  value: string;
+};
+
+interface IAuthErrorProps {
+  isLoginStage: boolean;
+  loginError?: string;
+  registrationError?: string;
+  onClick: (input: { email: string; password: string }) => void;
+}
+
+export class AuthForm extends Component<IAuthErrorProps, IAuthErrorState> {
   state = {
     email: '',
     password: '',
-    inputError: false
+    inputError: null
   };
 
   render() {
@@ -44,19 +60,23 @@ export class AuthForm extends Component {
           registrationError={registrationError}
           inputError={inputError}
         />
-        <button type="submit" className="auth__submit" onClick={this.handleClick}>
+        <button
+          type="submit"
+          className="auth__submit"
+          onClick={this.handleClick}
+        >
           {isLoginStage ? 'Войти' : 'Зарегестрироваться'}
         </button>
       </form>
     );
   }
 
-  handleChange = e => {
-    const input = e.target;
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input: inputType = e.target;
     this.setState({ [input.id]: input.value });
   };
 
-  handleClick = e => {
+  handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { onClick } = this.props;
     const { email, password } = this.state;
     e.preventDefault();
@@ -66,7 +86,7 @@ export class AuthForm extends Component {
     } else if (email === '' || password === '') {
       this.setState({ inputError: 'Оба поля обязательны для заполнения' });
     } else {
-      this.setState({ inputError: false });
+      this.setState({ inputError: null });
       onClick({ email, password });
     }
   };
