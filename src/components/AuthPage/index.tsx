@@ -84,7 +84,8 @@ export class AuthPage extends Component<IAuthPageProps, IAuthPageState> {
   };
 }
 
-const mapStateToProps = (state: IAuthPageState) => ({
+const mapStateToProps = (state: any) => ({
+  // to-do протипизировать стор
   isAuthorized: getIsAuthorized(state),
   loginError: getLoginError(state),
   registrationError: getRegistrationError(state)

@@ -10,8 +10,8 @@ describe('Component Chart', () => {
     max: '100',
     purchase: '8',
     sell: '10',
-    shartWidth: 700,
-    shartHeight: 400,
+    chartWidth: 700,
+    chartHeight: 400,
     isDataLoaded: true
   };
   const select = () => true;

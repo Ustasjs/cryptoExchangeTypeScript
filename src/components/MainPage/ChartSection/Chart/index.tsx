@@ -2,11 +2,23 @@ import React from 'react';
 import { LineChart } from 'react-chartkick';
 import './Chart.css';
 import Spinner from 'react-svg-spinner';
+import { exchange } from '../../types';
 
-export function Chart(props) {
+interface IChart {
+  chartWidth: string;
+  chartHeight: string;
+  isDataLoaded: boolean;
+  min: string;
+  max: string;
+  purchase: exchange[];
+  sell: exchange[];
+  onClick: (e: React.MouseEvent<HTMLElement>) => void;
+}
+
+export default function Chart(props: IChart) {
   const {
-    shartWidth,
-    shartHeight,
+    chartWidth,
+    chartHeight,
     isDataLoaded,
     min,
     max,
@@ -57,13 +69,11 @@ export function Chart(props) {
             min={min}
             max={max}
             legend={'bottom'}
-            width={shartWidth}
-            height={shartHeight}
+            width={chartWidth}
+            height={chartHeight}
           />
         </div>
       </div>
     </React.Fragment>
   );
 }
-
-export default Chart;

@@ -3,7 +3,13 @@ import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getIsAuthorized } from '../../reducers/auth';
 
-export class PrivateRoute extends PureComponent {
+interface IPrivateRouteProps {
+  path: string;
+  isAuthorized: boolean;
+  component: React.ComponentType<any>;
+}
+
+export class PrivateRoute extends PureComponent<IPrivateRouteProps> {
   render() {
     const { isAuthorized, component: Component, ...rest } = this.props;
 

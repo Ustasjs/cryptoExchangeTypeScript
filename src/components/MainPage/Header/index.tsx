@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, RouteComponentProps } from 'react-router-dom';
 import './Header.css';
 import headerLogo from '../images/Logo-white.svg';
+import { logout } from '../../../actions/auth';
 
-export class Header extends Component {
+interface IHeaderProps {
+  onClick: (e: React.MouseEvent<HTMLElement>) => void;
+  currentPriceEth: number;
+  currentPriceBtc: number;
+  email: string;
+  logout: typeof logout;
+  url: string;
+}
+
+export class Header extends Component<IHeaderProps> {
   render() {
-    const { url } = this.props.match;
+    const { url } = this.props;
     const { onClick, currentPriceEth, currentPriceBtc, email } = this.props;
     return (
       <header className="header">
@@ -59,12 +69,12 @@ export class Header extends Component {
     );
   }
 
-  handleClick = e => {
+  handleClick = (e: React.MouseEvent<HTMLElement>) => {
     const { logout } = this.props;
     logout();
   };
 
-  roundPrices = price => (price ? price.toFixed(1) : price);
+  roundPrices = (price: number) => (price ? price.toFixed(1) : price);
 }
 
 export default Header;

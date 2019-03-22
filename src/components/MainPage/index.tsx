@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, RouteComponentProps } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import ChartSection from './ChartSection';
@@ -21,8 +21,18 @@ import {
 } from '../../reducers/user';
 import { logout } from '../../actions/auth';
 import { selectBtc, selectEth, selectOffset } from '../../actions/currency';
+import { IMainPageBaseProps } from './types';
 
-export class MainPage extends Component {
+interface IMainPageProps extends IMainPageBaseProps {
+  selectBtc: typeof selectBtc;
+  selectEth: typeof selectEth;
+  selectOffset: typeof selectOffset;
+  logout: typeof logout;
+}
+
+export class MainPage extends Component<
+  RouteComponentProps<{ url: string }> & IMainPageProps
+> {
   render() {
     const { url } = this.props.match;
     const {
@@ -44,7 +54,7 @@ export class MainPage extends Component {
     return (
       <div className="mainPage">
         <Header
-          match={this.props.match}
+          url={this.props.match.url}
           onClick={this.handleCurrencyClick}
           currentPriceBtc={currentPriceBtc}
           currentPriceEth={currentPriceEth}
@@ -96,7 +106,7 @@ export class MainPage extends Component {
     );
   }
 
-  handleCurrencyClick = e => {
+  handleCurrencyClick = (e: React.MouseEvent<HTMLElement>): void => {
     const { selectBtc, selectEth } = this.props;
     const elementId = e.currentTarget.getAttribute('id');
     if (elementId === 'btc-link') {
@@ -106,7 +116,10 @@ export class MainPage extends Component {
     }
   };
 
-  handleOffsetClick = e => {
+  handleOffsetClick = (e: React.MouseEvent<HTMLElement>): void => {
+    if (!(e.target instanceof HTMLElement)) {
+      return;
+    }
     const { selectOffset } = this.props;
     const value = e.target.dataset.value;
     const elements = document.querySelectorAll('[data-value]');
@@ -122,7 +135,8 @@ export class MainPage extends Component {
   };
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
+  // to-do протипизировать стор
   btc: getBtc(state),
   eth: getEth(state),
   btcLoadingState: getBtcLoadingState(state),
@@ -139,4 +153,7 @@ const mapDispatchToProps = {
   logout
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MainPage);

@@ -2,8 +2,26 @@ import React, { Component } from 'react';
 import Chart from './Chart';
 import './ChartSection.css';
 import rotateIcon from './rotateIcon.svg';
+import { ICurrency } from '../types';
+import { selectBtc, selectEth } from '../../../actions/currency';
 
-export class ChartSection extends Component {
+interface IChartSectionState {
+  isDataLoaded: boolean;
+  windowWidth: number;
+  phoneOrientation: 'portrait' | null;
+}
+
+interface IChartSectionProps {
+  data: ICurrency;
+  isLoaded: boolean;
+  select: typeof selectBtc | typeof selectEth;
+  onClick: (e: React.MouseEvent<HTMLElement>) => void;
+}
+
+export class ChartSection extends Component<
+  IChartSectionProps,
+  IChartSectionState
+> {
   state = {
     isDataLoaded: true,
     windowWidth: 768,
@@ -20,7 +38,7 @@ export class ChartSection extends Component {
     this.checkPhoneOrientation();
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: IChartSectionProps) {
     const { isLoaded } = nextProps;
     if (isLoaded) {
       this.setState({ isDataLoaded: true });
@@ -35,8 +53,8 @@ export class ChartSection extends Component {
   render() {
     const { min, max, purchase, sell } = this.props.data;
     const { isDataLoaded, windowWidth, phoneOrientation } = this.state;
-    const shartWidth = windowWidth * 0.95 + 'px';
-    const shartHeight = windowWidth * 0.95 * 0.56 + 'px';
+    const chartWidth = windowWidth * 0.95 + 'px';
+    const chartHeight = windowWidth * 0.95 * 0.56 + 'px';
 
     return (
       <div className="chart">
@@ -49,8 +67,8 @@ export class ChartSection extends Component {
         ) : (
           <Chart
             {...{
-              shartWidth,
-              shartHeight,
+              chartWidth,
+              chartHeight,
               isDataLoaded,
               phoneOrientation,
               min,
@@ -66,7 +84,7 @@ export class ChartSection extends Component {
     );
   }
 
-  handleClick = e => {
+  handleClick = (e: React.MouseEvent<HTMLElement>): void => {
     const { onClick } = this.props;
     this.setState({ isDataLoaded: false });
     onClick(e);
