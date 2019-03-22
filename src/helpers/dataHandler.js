@@ -5,9 +5,7 @@ export function parseCurrency(numCurrency) {
 
 export function handleInputData(response) {
   function handleDataForChart(inputData, dataType) {
-    return inputData.map(value => {
-      return [value.mts / 1000, value[dataType]];
-    });
+    return inputData.map(value => [new Date(value.mts), value[dataType]]);
   }
 
   function getExtremeValue(inputData, typeOfExtreme) {
@@ -15,11 +13,11 @@ export function handleInputData(response) {
       case 'max':
         let sellMax = getMaxValueOfProp(inputData, 'sell');
         let purchaseMax = getMaxValueOfProp(inputData, 'purchase');
-        return Math.max(sellMax, purchaseMax);
+        return Math.max(sellMax, purchaseMax).toFixed(2);
       case 'min':
         let sellMin = getMinValueOfProp(inputData, 'sell');
         let purchaseMin = getMinValueOfProp(inputData, 'purchase');
-        return Math.min(sellMin, purchaseMin);
+        return Math.min(sellMin, purchaseMin).toFixed(2);
       default:
         throw new Error(
           'Неверное значения аргумента typeOfExtreme, аргумент может принимать только значения min и max'
