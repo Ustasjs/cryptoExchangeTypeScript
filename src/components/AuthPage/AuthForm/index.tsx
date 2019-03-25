@@ -15,8 +15,8 @@ type inputType = {
 
 interface IAuthErrorProps {
   isLoginStage: boolean;
-  loginError?: string;
-  registrationError?: string;
+  loginError?: string | null;
+  registrationError?: string | null;
   onClick: (input: { email: string; password: string }) => void;
 }
 

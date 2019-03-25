@@ -13,15 +13,15 @@ import {
   getLoginError,
   getRegistrationError
 } from '../../reducers/auth';
-import { ICredentials, IParaticlesParams } from '../../types';
+import { ICredentials, IParaticlesParams, IStore } from '../../types';
 
 interface IAuthPageState {
   isLoginStage: boolean;
 }
 
 interface IAuthPageProps {
-  loginError?: string;
-  registrationError?: string;
+  loginError?: string | null;
+  registrationError?: string | null;
   isAuthorized: boolean;
   loginRequest: typeof loginRequest;
   registrationRequest: typeof registrationRequest;
@@ -84,8 +84,7 @@ export class AuthPage extends Component<IAuthPageProps, IAuthPageState> {
   };
 }
 
-const mapStateToProps = (state: any) => ({
-  // to-do протипизировать стор
+const mapStateToProps = (state: IStore) => ({
   isAuthorized: getIsAuthorized(state),
   loginError: getLoginError(state),
   registrationError: getRegistrationError(state)

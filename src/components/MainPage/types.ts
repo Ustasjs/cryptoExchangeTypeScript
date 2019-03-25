@@ -1,29 +1,6 @@
-interface ICurrencyData {
-  high: number;
-  low: number;
-  mts: number;
-  purchase: number;
-  sell: number;
-}
+import { ILoadingState, ICurrency } from '../../types';
 
-export interface ICurrency {
-  currentPurchasePrice: number;
-  currentSellPrice: number;
-  data: ICurrencyData[];
-  max: string;
-  min: string;
-  purchase: exchange[];
-  sell: exchange[];
-}
-
-interface ILoadingState {
-  error: string | boolean;
-  isLoading: boolean;
-  isLoaded: boolean;
-}
-
-export type exchange = [Date, number];
-export type wallet = [string, string];
+export type wallet = string[];
 
 export interface IMainPageBaseProps {
   btc: ICurrency;

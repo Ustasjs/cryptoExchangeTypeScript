@@ -3,8 +3,8 @@ import './AuthError.css';
 
 interface IAuthErrorProps {
   isLoginStage: boolean;
-  loginError?: string;
-  registrationError?: string;
+  loginError?: string | null;
+  registrationError?: string | null;
   inputError: string | null;
 }
 

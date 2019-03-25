@@ -22,6 +22,7 @@ import {
 import { logout } from '../../actions/auth';
 import { selectBtc, selectEth, selectOffset } from '../../actions/currency';
 import { IMainPageBaseProps } from './types';
+import { IStore } from '../../types';
 
 interface IMainPageProps extends IMainPageBaseProps {
   selectBtc: typeof selectBtc;
@@ -135,8 +136,7 @@ export class MainPage extends Component<
   };
 }
 
-const mapStateToProps = (state: any) => ({
-  // to-do протипизировать стор
+const mapStateToProps = (state: IStore) => ({
   btc: getBtc(state),
   eth: getEth(state),
   btcLoadingState: getBtcLoadingState(state),

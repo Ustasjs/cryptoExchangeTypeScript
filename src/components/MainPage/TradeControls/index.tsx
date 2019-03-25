@@ -2,10 +2,37 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getSelected, getBtc, getEth } from '../../../reducers/currency';
 import { getErrorBuy, getErrorSell } from '../../../reducers/user';
-import { sellCurrencyRequest, buyCurrencyRequest } from '../../../actions/trade';
+import {
+  sellCurrencyRequest,
+  buyCurrencyRequest
+} from '../../../actions/trade';
 import './TradeControls.css';
+import { ICurrency, IStore } from '../../../types';
 
-export class TradeControls extends Component {
+interface ITradeControlsProps {
+  selected: string;
+  errorSell: string | boolean;
+  errorBuy: string | boolean;
+  sellCurrencyRequest: typeof sellCurrencyRequest;
+  buyCurrencyRequest: typeof buyCurrencyRequest;
+  btc: ICurrency;
+  eth: ICurrency;
+}
+
+interface ITradeControlsState {
+  resultValue: string;
+  inputError: string | boolean;
+  currencyInputError: string | boolean;
+  sellInputError: string | boolean;
+  purchaseInputError: string | boolean;
+  sellCost: string;
+  purchaseCost: string;
+}
+
+export class TradeControls extends Component<
+  ITradeControlsProps,
+  ITradeControlsState
+> {
   state = {
     resultValue: '',
     inputError: false,
@@ -16,15 +43,19 @@ export class TradeControls extends Component {
     purchaseCost: ''
   };
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: ITradeControlsProps) {
     const { resultValue, inputError } = this.state;
-    const { selected } = this.props.selected;
+    const { selected } = this.props;
     const newSelected = nextProps.selected;
     if (selected !== nextProps.selected && !inputError) {
       this.setState({
         ...this.state,
         sellCost: this.getCurrencyPrice(resultValue, newSelected, 'sell'),
-        purchaseCost: this.getCurrencyPrice(resultValue, newSelected, 'purchase')
+        purchaseCost: this.getCurrencyPrice(
+          resultValue,
+          newSelected,
+          'purchase'
+        )
       });
     }
   }
@@ -43,9 +74,15 @@ export class TradeControls extends Component {
     return (
       <div className="controls">
         <h2 className="title controls_title">Покупка / продажа</h2>
-        {inputError ? <div className="controls__error">{inputError}</div> : false}
+        {inputError ? (
+          <div className="controls__error">{inputError}</div>
+        ) : (
+          false
+        )}
         {errorSell || errorBuy ? (
-          <div className="controls__error controls__error_trade">Недостаточно средств</div>
+          <div className="controls__error controls__error_trade">
+            Недостаточно средств
+          </div>
         ) : (
           false
         )}
@@ -54,7 +91,7 @@ export class TradeControls extends Component {
             <div className="control__wrap">
               <div className="input">
                 <input
-                  maxLength="18"
+                  maxLength={18}
                   type="text"
                   className={
                     'input__value input__value_btc' +
@@ -73,7 +110,7 @@ export class TradeControls extends Component {
             <div className="control__wrap">
               <div className="input">
                 <input
-                  maxLength="18"
+                  maxLength={18}
                   type="text"
                   className={
                     'input__value input__value_btc' +
@@ -99,10 +136,11 @@ export class TradeControls extends Component {
             <div className="control__wrap">
               <div className="input">
                 <input
-                  maxLength="18"
+                  maxLength={18}
                   type="text"
                   className={
-                    'input__value input__value_btc' + (sellInputError ? ' input__value_error' : '')
+                    'input__value input__value_btc' +
+                    (sellInputError ? ' input__value_error' : '')
                   }
                   value={sellCost}
                   id="sell"
@@ -125,15 +163,15 @@ export class TradeControls extends Component {
     );
   }
 
-  handleInputChange = e => {
+  handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { selected } = this.props;
     const value = e.target.value;
     const targetId = e.target.getAttribute('id');
-    let targetKey;
-    let firstRelatedKey;
-    let secondRelatedKey;
-    let firstRelatedValue;
-    let secondRelatedValue;
+    let targetKey: 'resultValue' | 'sellCost' | 'purchaseCost';
+    let firstRelatedKey: 'resultValue' | 'sellCost';
+    let secondRelatedKey: 'purchaseCost' | 'sellCost';
+    let firstRelatedValue: string;
+    let secondRelatedValue: string;
 
     switch (targetId) {
       case 'currency':
@@ -148,14 +186,22 @@ export class TradeControls extends Component {
         firstRelatedKey = 'resultValue';
         secondRelatedKey = 'purchaseCost';
         firstRelatedValue = this.getCurrencyValue(value, selected, targetId);
-        secondRelatedValue = this.getCurrencyPrice(firstRelatedValue, selected, 'purchase');
+        secondRelatedValue = this.getCurrencyPrice(
+          firstRelatedValue,
+          selected,
+          'purchase'
+        );
         break;
       case 'purchase':
         targetKey = 'purchaseCost';
         firstRelatedKey = 'resultValue';
         secondRelatedKey = 'sellCost';
         firstRelatedValue = this.getCurrencyValue(value, selected, targetId);
-        secondRelatedValue = this.getCurrencyPrice(firstRelatedValue, selected, 'sell');
+        secondRelatedValue = this.getCurrencyPrice(
+          firstRelatedValue,
+          selected,
+          'sell'
+        );
         break;
       default:
         return;
@@ -176,10 +222,13 @@ export class TradeControls extends Component {
     });
   };
 
-  handleInputBlur = e => {
+  handleInputBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const targetId = e.target.getAttribute('id');
-    let errorType;
+    let errorType:
+      | 'currencyInputError'
+      | 'sellInputError'
+      | 'purchaseInputError';
 
     switch (targetId) {
       case 'currency':
@@ -210,7 +259,10 @@ export class TradeControls extends Component {
     }
   };
 
-  handleClick = e => {
+  handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!(e.target instanceof HTMLElement)) {
+      return;
+    }
     const { resultValue, inputError } = this.state;
     const { selected, sellCurrencyRequest, buyCurrencyRequest } = this.props;
     const payload = { currency: selected, value: resultValue };
@@ -223,7 +275,11 @@ export class TradeControls extends Component {
     }
   };
 
-  getCurrencyPrice = (value, typeOfValue, typeOfAction) => {
+  getCurrencyPrice = (
+    value: string,
+    typeOfValue: string,
+    typeOfAction: 'sell' | 'purchase'
+  ) => {
     const { btc, eth } = this.props;
 
     if (!value || !btc.currentSellPrice || !eth.currentSellPrice) {
@@ -233,45 +289,49 @@ export class TradeControls extends Component {
     if (typeOfAction !== 'sell' && typeOfAction !== 'purchase') {
       throw new Error('Введен неверный тип транзакции');
     }
-
+    const numericValue = Number(value);
     switch (typeOfValue) {
       case 'btc':
         return typeOfAction === 'sell'
-          ? (value * btc.currentSellPrice).toFixed(2)
-          : (value * btc.currentPurchasePrice).toFixed(2);
+          ? (numericValue * btc.currentSellPrice).toFixed(2)
+          : (numericValue * btc.currentPurchasePrice).toFixed(2);
       case 'eth':
         return typeOfAction === 'sell'
-          ? (value * eth.currentSellPrice).toFixed(2)
-          : (value * eth.currentPurchasePrice).toFixed(2);
+          ? (numericValue * eth.currentSellPrice).toFixed(2)
+          : (numericValue * eth.currentPurchasePrice).toFixed(2);
       default:
         throw new Error('Введен неверный тип валюты');
     }
   };
 
-  getCurrencyValue = (value, typeOfValue, typeOfAction) => {
+  getCurrencyValue = (
+    value: string,
+    typeOfValue: string,
+    typeOfAction: 'sell' | 'purchase'
+  ) => {
     const { btc, eth } = this.props;
     if (!value) return '';
 
     if (typeOfAction !== 'sell' && typeOfAction !== 'purchase') {
       throw new Error('Введен неверный тип транзакции');
     }
-
+    const numericValue = Number(value);
     switch (typeOfValue) {
       case 'btc':
         return typeOfAction === 'sell'
-          ? value / btc.currentSellPrice
-          : value / btc.currentPurchasePrice;
+          ? (numericValue / btc.currentSellPrice).toFixed(4)
+          : (numericValue / btc.currentPurchasePrice).toFixed(4);
       case 'eth':
         return typeOfAction === 'sell'
-          ? value / eth.currentSellPrice
-          : value / eth.currentPurchasePrice;
+          ? (numericValue / eth.currentSellPrice).toFixed(4)
+          : (numericValue / eth.currentPurchasePrice).toFixed(4);
       default:
         throw new Error('Введен неверный тип валюты');
     }
   };
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: IStore) => ({
   selected: getSelected(state),
   btc: getBtc(state),
   eth: getEth(state),
@@ -283,4 +343,7 @@ const mapDispatchToProps = {
   buyCurrencyRequest
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TradeControls);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TradeControls);

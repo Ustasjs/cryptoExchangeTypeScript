@@ -2,7 +2,7 @@ import React from 'react';
 import { LineChart } from 'react-chartkick';
 import './Chart.css';
 import Spinner from 'react-svg-spinner';
-import { exchange } from '../../types';
+import { exchange } from '../../../../types';
 
 interface IChart {
   chartWidth: string;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Chart from './Chart';
 import './ChartSection.css';
 import rotateIcon from './rotateIcon.svg';
-import { ICurrency } from '../types';
+import { ICurrency } from '../../../types';
 import { selectBtc, selectEth } from '../../../actions/currency';
 
 interface IChartSectionState {

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getIsAuthorized } from '../../reducers/auth';
+import { IStore } from '../../types';
 
 interface IPrivateRouteProps {
   path: string;
@@ -24,6 +25,6 @@ export class PrivateRoute extends PureComponent<IPrivateRouteProps> {
   }
 }
 
-export default connect(state => ({
+export default connect((state: IStore) => ({
   isAuthorized: getIsAuthorized(state)
 }))(PrivateRoute);
