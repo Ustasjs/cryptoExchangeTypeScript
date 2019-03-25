@@ -1,5 +1,38 @@
-export interface IStore {}
+import { IAuthState } from '../reducers/auth';
+import { ICurrencyState } from '../reducers/currency';
+import { NetworkState } from '../reducers/network';
+import { IUserState } from '../reducers/user';
 
+export interface IStore {
+  auth: IAuthState;
+  currency: ICurrencyState;
+  networkError: NetworkState;
+  user: IUserState;
+}
+
+interface ICurrencyData {
+  high: number;
+  low: number;
+  mts: number;
+  purchase: number;
+  sell: number;
+}
+export interface ILoadingState {
+  error?: string | boolean;
+  isLoading: boolean;
+  isLoaded: boolean;
+}
+
+export type exchange = [Date, number];
+export interface ICurrency {
+  currentPurchasePrice: number;
+  currentSellPrice: number;
+  data: ICurrencyData[];
+  max: string;
+  min: string;
+  purchase: exchange[];
+  sell: exchange[];
+}
 export interface ICredentials {
   email: string;
   password: string;
