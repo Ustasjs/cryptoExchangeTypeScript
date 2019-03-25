@@ -1,14 +1,41 @@
-export function parseCurrency(numCurrency) {
+import { ICurrency } from '../types';
+
+export function parseCurrency(numCurrency: number) {
   if (!numCurrency) return (0).toFixed(4).split('.');
   return numCurrency.toFixed(4).split('.');
 }
 
-export function handleInputData(response) {
-  function handleDataForChart(inputData, dataType) {
-    return inputData.map(value => [new Date(value.mts), value[dataType]]);
+interface IResponceData {
+  mts: number;
+  sell: number;
+  purchase: number;
+  high: number;
+  low: number;
+}
+
+interface IResponce {
+  data: {
+    result: IResponceData[];
+  };
+}
+
+export function handleInputData(response: IResponce): ICurrency {
+  function handleDataForChart(
+    inputData: IResponceData[],
+    dataType: 'sell' | 'purchase'
+  ): [Date, number][] {
+    return inputData.map(
+      (value: IResponceData): [Date, number] => [
+        new Date(value.mts),
+        value[dataType]
+      ]
+    );
   }
 
-  function getExtremeValue(inputData, typeOfExtreme) {
+  function getExtremeValue(
+    inputData: IResponceData[],
+    typeOfExtreme: 'max' | 'min'
+  ): string {
     switch (typeOfExtreme) {
       case 'max':
         let sellMax = getMaxValueOfProp(inputData, 'sell');
@@ -25,13 +52,13 @@ export function handleInputData(response) {
     }
   }
 
-  const result = {
+  const result: ICurrency = {
     sell: [],
     purchase: [],
     currentSellPrice: 0,
     currentPurchasePrice: 0,
-    min: 0,
-    max: 0,
+    min: '0',
+    max: '0',
     data: response.data.result
   };
   result.sell = handleDataForChart(result.data, 'sell');
@@ -44,14 +71,20 @@ export function handleInputData(response) {
   return result;
 }
 
-export function getMinValueOfProp(arr, prop) {
+export function getMinValueOfProp(
+  arr: IResponceData[],
+  prop: 'sell' | 'purchase'
+) {
   let elementWithMinValue = arr.reduce((prev, current) => {
     return current[prop] < prev[prop] ? current : prev;
   });
   return elementWithMinValue[prop];
 }
 
-export function getMaxValueOfProp(arr, prop) {
+export function getMaxValueOfProp(
+  arr: IResponceData[],
+  prop: 'sell' | 'purchase'
+) {
   let elementWithMaxValue = arr.reduce((prev, current) => {
     return current[prop] > prev[prop] ? current : prev;
   });
