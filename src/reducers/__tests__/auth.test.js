@@ -12,16 +12,16 @@ import { auth, handleRegistrationError } from '../auth';
 
 const initState = {
   isAuthorized: false,
-  loginError: false,
-  registrationError: false
+  loginError: null,
+  registrationError: null
 };
 
 describe('Auth reducer', () => {
   describe('registrationRequest action', () => {
     initState.registrationError = true;
-    it('registrationRequest action makes registrationError false', () => {
+    it('registrationRequest action makes registrationError null', () => {
       expect(auth(initState, registrationRequest()).registrationError).toBe(
-        false
+        null
       );
     });
   });
@@ -30,9 +30,9 @@ describe('Auth reducer', () => {
     it('registrationSuccess action makes isAuthorized true', () => {
       expect(auth(initState, registrationSuccess()).isAuthorized).toBe(true);
     });
-    it('registrationSuccess action makes registrationError false', () => {
+    it('registrationSuccess action makes registrationError null', () => {
       expect(auth(initState, registrationSuccess()).registrationError).toBe(
-        false
+        null
       );
     });
   });
@@ -55,8 +55,8 @@ describe('Auth reducer', () => {
   });
   describe('loginRequest action', () => {
     initState.loginError = false;
-    it('loginRequest action makes loginError false', () => {
-      expect(auth(initState, loginRequest()).loginError).toBe(false);
+    it('loginRequest action makes loginError null', () => {
+      expect(auth(initState, loginRequest()).loginError).toBe(null);
     });
   });
   describe('loginSuccess action', () => {
@@ -64,13 +64,13 @@ describe('Auth reducer', () => {
     it('loginSuccess action makes isAuthorized true', () => {
       expect(auth(initState, loginSuccess()).isAuthorized).toBe(true);
     });
-    it('loginSuccess action makes loginError false', () => {
-      expect(auth(initState, loginSuccess()).loginError).toBe(false);
+    it('loginSuccess action makes loginError null', () => {
+      expect(auth(initState, loginSuccess()).loginError).toBe(null);
     });
   });
   describe('loginFailure action', () => {
     const message = {
-      email: 'test@test.ru'
+      email: ['test@test.ru']
     };
     it('loginFailure action makes isAuthorized false', () => {
       expect(auth(initState, loginFailure({ message })).isAuthorized).toBe(
@@ -79,7 +79,7 @@ describe('Auth reducer', () => {
     });
     it('loginFailure action add to loginError message field)', () => {
       expect(auth(initState, loginFailure({ message })).loginError).toBe(
-        message
+        handleRegistrationError(message)
       );
     });
   });

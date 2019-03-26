@@ -11,12 +11,13 @@ import {
   buyCurrencyFailure
 } from '../../actions/trade';
 import { logout } from '../../actions/auth';
-import { parseCurrency } from '../../helpers/dataHandler';
 import { user } from '../user';
 
 describe('Users reducer', () => {
   const initState = {
-    userInfo: {},
+    userInfo: {
+      email: ''
+    },
     userInfoError: false,
     wallet: {
       usd: 0,
@@ -169,21 +170,22 @@ describe('Users reducer', () => {
     it('shouldn`t mutate init state', () => {
       expect(user(initState, logout())).not.toBe(initState);
     });
-
-    it('should add action.payload to errorBuy', () => {
+    const initState = {
+      userInfo: {
+        email: ''
+      },
+      userInfoError: false,
+      wallet: {
+        usd: 0,
+        btc: 0,
+        eth: 0
+      },
+      walletError: false,
+      errorSell: false,
+      errorBuy: false
+    };
+    it('should refresh store to initState', () => {
       const currentState = { state: 'state' };
-      const initState = {
-        userInfo: {},
-        userInfoError: false,
-        wallet: {
-          usd: 0,
-          btc: 0,
-          eth: 0
-        },
-        walletError: false,
-        errorSell: false,
-        errorBuy: false
-      };
       expect(user(currentState, logout())).toEqual(initState);
     });
   });
