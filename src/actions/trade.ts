@@ -19,3 +19,19 @@ export const {
   'BUY_CURRENCY_SUCCESS',
   'BUY_CURRENCY_FAILURE'
 );
+
+export interface ISellCurrencyRequest {
+  type: 'SELL_CURRENCY_REQUEST';
+  payload: {
+    currency: 'btc' | 'eth';
+    value: string;
+  };
+}
+
+export interface IBuyCurrencyRequest {
+  type: 'BUY_CURRENCY_REQUEST';
+  payload: {
+    currency: 'btc' | 'eth';
+    value: string;
+  };
+}

@@ -1,15 +1,21 @@
 import {
   registrationRequest,
   registrationSuccess,
-  registrationFailure
+  registrationFailure,
+  IRegistrationRequest
 } from '../actions/auth';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { registration } from '../api';
 import requestFlow from '../sagas/request';
+import { IAuthResponse } from '../types';
 
-export function* fetchRegistrationSaga(action) {
+export function* fetchRegistrationSaga(action: IRegistrationRequest) {
   try {
-    let response = yield call(requestFlow, registration, action.payload);
+    const response: IAuthResponse = yield call(
+      requestFlow,
+      registration,
+      action.payload
+    );
     yield put(registrationSuccess(response.data.jwt));
   } catch (error) {
     yield put(registrationFailure(error.data));

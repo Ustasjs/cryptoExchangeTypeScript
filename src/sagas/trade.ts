@@ -4,23 +4,34 @@ import {
   sellCurrencyFailure,
   buyCurrencyRequest,
   buyCurrencySuccess,
-  buyCurrencyFailure
+  buyCurrencyFailure,
+  ISellCurrencyRequest,
+  IBuyCurrencyRequest
 } from '../actions/trade';
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { sellCurrency, buyCurrency } from '../api';
 
-export function* fetchSellCurrencySaga(action) {
+interface ITradeResponse {
+  data: {
+    btc: number;
+    eth: number;
+    result: string;
+    usd: number;
+  };
+}
+
+export function* fetchSellCurrencySaga(action: ISellCurrencyRequest) {
   try {
     const currency = action.payload.currency;
     const value = action.payload.value;
-    let response = yield call(sellCurrency, currency, value);
+    let response: ITradeResponse = yield call(sellCurrency, currency, value);
     yield put(sellCurrencySuccess(response.data));
   } catch (error) {
     yield put(sellCurrencyFailure(error));
   }
 }
 
-export function* fetchBuyCurrencySaga(action) {
+export function* fetchBuyCurrencySaga(action: IBuyCurrencyRequest) {
   try {
     const currency = action.payload.currency;
     const value = action.payload.value;

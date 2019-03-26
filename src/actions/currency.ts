@@ -25,3 +25,13 @@ export const { selectBtc, selectEth, selectOffset } = createActions(
   'SELECT_ETH',
   'SELECT_OFFSET'
 );
+
+export interface IFetchBtcRequest {
+  type: 'FETCH_BTC_REQUEST';
+  payload: string;
+}
+
+export interface IFetchEthRequest {
+  type: 'FETCH_ETH_REQUEST';
+  payload: string;
+}

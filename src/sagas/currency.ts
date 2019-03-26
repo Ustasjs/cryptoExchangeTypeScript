@@ -19,14 +19,17 @@ import {
   fetchBtcFailure,
   fetchEthFailure,
   fetchEthSuccess,
-  selectOffset
+  selectOffset,
+  IFetchBtcRequest,
+  IFetchEthRequest
 } from '../actions/currency';
 import { candles } from '../api';
 import { handleInputData } from '../helpers/dataHandler';
+import { IResponce, ICurrency } from '../types';
 
 export function* fetchCurrencyFlow() {
   while (true) {
-    const offset = yield select(getOffset);
+    const offset: string = yield select(getOffset);
     yield put(fetchBtcRequest(offset));
     yield put(fetchEthRequest(offset));
 
@@ -54,20 +57,20 @@ export function* currencyWatch() {
   }
 }
 
-export function* fetchBtcFlow(action) {
+export function* fetchBtcFlow(action: IFetchBtcRequest) {
   try {
-    const response = yield call(candles, 'btc', action.payload);
-    const result = handleInputData(response);
+    const response: IResponce = yield call(candles, 'btc', action.payload);
+    const result: ICurrency = handleInputData(response);
     yield put(fetchBtcSuccess(result));
   } catch (error) {
     yield put(fetchBtcFailure(error));
   }
 }
 
-export function* fetchEthFlow(action) {
+export function* fetchEthFlow(action: IFetchEthRequest) {
   try {
-    const response = yield call(candles, 'eth', action.payload);
-    const result = handleInputData(response);
+    const response: IResponce = yield call(candles, 'eth', action.payload);
+    const result: ICurrency = handleInputData(response);
     yield put(fetchEthSuccess(result));
   } catch (error) {
     yield put(fetchEthFailure(error));
