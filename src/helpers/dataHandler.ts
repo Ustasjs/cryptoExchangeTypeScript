@@ -1,22 +1,8 @@
-import { ICurrency } from '../types';
+import { ICurrency, IResponce, IResponceData } from '../types';
 
 export function parseCurrency(numCurrency: number) {
   if (!numCurrency) return (0).toFixed(4).split('.');
   return numCurrency.toFixed(4).split('.');
-}
-
-interface IResponceData {
-  mts: number;
-  sell: number;
-  purchase: number;
-  high: number;
-  low: number;
-}
-
-interface IResponce {
-  data: {
-    result: IResponceData[];
-  };
 }
 
 export function handleInputData(response: IResponce): ICurrency {

@@ -3,6 +3,25 @@ import { ICurrencyState } from '../reducers/currency';
 import { NetworkState } from '../reducers/network';
 import { IUserState } from '../reducers/user';
 
+export interface IResponceData {
+  mts: number;
+  sell: number;
+  purchase: number;
+  high: number;
+  low: number;
+}
+
+export interface IAuthResponse {
+  data: {
+    jwt: string;
+  };
+}
+
+export interface IResponce {
+  data: {
+    result: IResponceData[];
+  };
+}
 export interface IStore {
   auth: IAuthState;
   currency: ICurrencyState;
