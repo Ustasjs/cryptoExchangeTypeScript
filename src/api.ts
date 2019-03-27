@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { ICredentials } from './types';
 
-const baseURL = 'https://crypto-exchange-backend.herokuapp.com/';
+const baseURL =
+  process.env.NODE_ENV === 'development'
+    ? 'https://crypto-exchange-backend.herokuapp.com/'
+    : '/';
 
 axios.defaults.headers.post['Accept'] = '*/*';
 
