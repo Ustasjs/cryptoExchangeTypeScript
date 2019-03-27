@@ -29,20 +29,24 @@ export default function Chart(props: IChart) {
   return (
     <React.Fragment>
       <h2 className="title chart_title">Окно графика</h2>
-      <ul className="chart__buttons" onClick={onClick}>
-        <li className="chart__button chart__button_active" data-value="2h">
+      <ul className="chart__buttons">
+        <li
+          className="chart__button chart__button_active"
+          data-value="2h"
+          onClick={onClick}
+        >
           2ч
         </li>
-        <li className="chart__button" data-value="4h">
+        <li className="chart__button" data-value="4h" onClick={onClick}>
           4ч
         </li>
-        <li className="chart__button" data-value="8h">
+        <li className="chart__button" data-value="8h" onClick={onClick}>
           8ч
         </li>
-        <li className="chart__button" data-value="1d">
+        <li className="chart__button" data-value="1d" onClick={onClick}>
           1д
         </li>
-        <li className="chart__button" data-value="7d">
+        <li className="chart__button" data-value="7d" onClick={onClick}>
           7д
         </li>
       </ul>
