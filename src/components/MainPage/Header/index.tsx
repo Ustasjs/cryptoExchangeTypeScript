@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink, RouteComponentProps } from 'react-router-dom';
-import './Header.css';
+import './Header.scss';
 import headerLogo from '../images/Logo-white.svg';
 import { logout } from '../../../actions/auth';
 

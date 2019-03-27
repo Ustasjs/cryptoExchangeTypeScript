@@ -6,7 +6,7 @@ import {
   sellCurrencyRequest,
   buyCurrencyRequest
 } from '../../../actions/trade';
-import './TradeControls.css';
+import './TradeControls.scss';
 import { ICurrency, IStore } from '../../../types';
 
 interface ITradeControlsProps {

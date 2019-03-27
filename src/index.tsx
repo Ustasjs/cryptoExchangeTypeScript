@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'normalize.css';
-import './index.css';
-import './static/styles/font.css';
-import './static/styles/main.css';
+import './index.scss';
+import './static/styles/font.scss';
+import './static/styles/main.scss';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import createStore from './store';

@@ -1,5 +1,5 @@
 import React from 'react';
-import './AuthError.css';
+import './AuthError.scss';
 
 interface IAuthErrorProps {
   isLoginStage: boolean;

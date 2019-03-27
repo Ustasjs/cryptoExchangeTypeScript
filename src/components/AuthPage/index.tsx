@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import './AuthPage.css';
+import './AuthPage.scss';
 import logo from './images/Logo.svg';
 import AuthForm from './AuthForm';
 import Particles from 'react-particles-js';

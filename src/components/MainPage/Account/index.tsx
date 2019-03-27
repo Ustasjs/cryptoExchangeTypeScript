@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { wallet } from '../types';
-import './Account.css';
+import './Account.scss';
 
 interface IAccountProps {
   usd: wallet;

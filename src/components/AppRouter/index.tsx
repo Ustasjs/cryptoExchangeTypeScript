@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import './AppRouter.css';
+import './AppRouter.scss';
 
 import AuthPage from '../AuthPage';
 import PrivateRoute from '../PrivateRoute';

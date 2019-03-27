@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AuthError } from '../AuthError';
-import './AuthForm.css';
+import './AuthForm.scss';
 import userShape from './images/user-shape.svg';
 import lockShape from './images/padlock-unlock.svg';
 

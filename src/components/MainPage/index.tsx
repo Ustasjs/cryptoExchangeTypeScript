@@ -6,7 +6,7 @@ import Footer from './Footer';
 import ChartSection from './ChartSection';
 import Account from './Account';
 import TradeControls from './TradeControls';
-import './MainPage.css';
+import './MainPage.scss';
 import {
   getBtc,
   getEth,

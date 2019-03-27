@@ -1,6 +1,6 @@
 import React from 'react';
 import { LineChart } from 'react-chartkick';
-import './Chart.css';
+import './Chart.scss';
 import Spinner from 'react-svg-spinner';
 import { exchange } from '../../../../types';
 
