@@ -1,6 +1,7 @@
 ## Вариант клиента для криптобиржи, написанный на typescript
 
 [Ссылка на оригинальный репозиторий](https://github.com/Ustasjs/cryptoExchange)
+
 [Ссылка на бэкенд](https://github.com/Ustasjs/cryptoExchangeBackend)
 
 ## Старт проекта
