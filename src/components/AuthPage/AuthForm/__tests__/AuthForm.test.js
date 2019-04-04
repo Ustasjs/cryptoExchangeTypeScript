@@ -34,13 +34,13 @@ describe('Component AuthPage', () => {
             .includes('Войти')
         ).toBeTruthy();
       });
-      it('If isLoginStage === false submit button has content "Зарегестрироваться"', () => {
+      it('If isLoginStage === false submit button has content "Зарегистрироваться"', () => {
         wrapper.setProps({ isLoginStage: false });
         expect(
           wrapper
             .find('button.auth__submit')
             .html()
-            .includes('Зарегестрироваться')
+            .includes('Зарегистрироваться')
         ).toBeTruthy();
       });
     });

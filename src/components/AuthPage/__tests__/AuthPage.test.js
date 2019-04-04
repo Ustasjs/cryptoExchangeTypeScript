@@ -62,7 +62,7 @@ describe('Component AuthPage', () => {
         wrapper
           .find('span.auth__text')
           .html()
-          .includes('Уже зарегестрированы?')
+          .includes('Уже зарегистрированы?')
       ).toBeTruthy();
     });
 

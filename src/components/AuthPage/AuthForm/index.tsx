@@ -65,7 +65,7 @@ export class AuthForm extends Component<IAuthErrorProps, IAuthErrorState> {
           className="auth__submit"
           onClick={this.handleClick}
         >
-          {isLoginStage ? 'Войти' : 'Зарегестрироваться'}
+          {isLoginStage ? 'Войти' : 'Зарегистрироваться'}
         </button>
       </form>
     );

@@ -57,7 +57,7 @@ export class AuthPage extends Component<IAuthPageProps, IAuthPageState> {
             {isLoginStage ? (
               <span className="auth__text">Впервые на сайте?</span>
             ) : (
-              <span className="auth__text">Уже зарегестрированы?</span>
+              <span className="auth__text">Уже зарегистрированы?</span>
             )}
             <a className="auth__link" onClick={this.handleStatusChangeClick}>
               {isLoginStage ? 'Регистрация' : 'Войти'}
